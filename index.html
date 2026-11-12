@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>かまいし冬灯り フォトコンテスト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+/* 一夜の世界観で固定（単一テーマ）：港町の冬の夜、街灯の金と残り火の橙。
+   レイアウト：スマホ縦長を基準に、夜空のヒーロー → 賞 → 募集要項 → 流れ → きまり → 結果発表 */
+:root{
+  --night:#0a0f24;
+  --night-2:#121a38;
+  --lamp:#f2c14e;
+  --ember:#e88a3a;
+  --frost:#f3eee4;
+  --mist:#9aa2c4;
+  --line:rgba(242,193,78,.28);
+  --display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --latin:"Cormorant Garamond",Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--night);color:var(--frost);font-family:var(--body);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;padding:56px 0 64px;background:radial-gradient(120% 80% at 50% 0%,#1b2552 0%,var(--night) 70%)}
+#sky{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;text-align:center}
+.eyebrow{font-family:var(--latin);font-style:italic;letter-spacing:.12em;color:var(--lamp);font-size:15px;margin:0 0 18px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--lamp)}
+.hero .logo{width:132px;height:auto;margin:0 auto 22px;filter:drop-shadow(0 0 18px rgba(242,193,78,.35))}
+.hero .event{font-family:var(--display);font-weight:800;font-size:clamp(26px,7.4vw,40px);line-height:1.25;margin:0;letter-spacing:.04em}
+.hero .event span{font-family:var(--latin);font-style:italic;font-weight:500;color:var(--lamp);margin-left:.25em}
+.hero .contest{display:inline-block;margin:8px 0 22px;padding:4px 14px;border:1px solid var(--lamp);border-radius:999px;color:var(--lamp);font-weight:700;letter-spacing:.2em;font-size:clamp(14px,3.8vw,17px)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,7.6vw,48px);line-height:1.35;margin:0;letter-spacing:.02em;white-space:nowrap}
+.hero h1 .glow{color:var(--lamp);text-shadow:0 0 28px rgba(242,193,78,.55),0 0 2px rgba(255,230,160,.9)}
+.hero .sub{font-family:var(--display);font-weight:600;font-size:clamp(18px,4.6vw,24px);margin:18px 0 0;color:var(--frost)}
+.hero .org{color:var(--mist);font-size:14px;margin:6px 0 0}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:8px 16px 8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,15,36,.6);backdrop-filter:blur(4px);font-size:14px}
+.status .dot{width:9px;height:9px;border-radius:50%;background:var(--lamp);box-shadow:0 0 12px var(--lamp)}
+.status.judging .dot{background:var(--mist);box-shadow:none}
+.status.result .dot{background:var(--ember);box-shadow:0 0 12px var(--ember)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:14px;font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer;font-family:var(--body)}
+.btn-primary{background:linear-gradient(180deg,#ffd56b,var(--lamp) 55%,#d9a12c);color:#1a1205;box-shadow:0 10px 30px -8px rgba(242,193,78,.6),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-primary[aria-disabled="true"]{background:#2a3150;color:var(--mist);box-shadow:none;cursor:default}
+.btn-ghost{border:1px solid var(--line);color:var(--frost);background:transparent}
+.btn:focus-visible{outline:3px solid var(--frost);outline-offset:3px}
+.note{font-size:13px;color:var(--mist);margin:10px 0 0}
+
+/* ---------- SECTIONS ---------- */
+section{padding:56px 0;border-top:1px solid rgba(154,162,196,.14)}
+.sec-head{display:flex;align-items:baseline;justify-content:center;gap:14px;margin:0 0 26px}
+.sec-head .no{font-family:var(--latin);font-style:italic;color:var(--lamp);font-size:20px}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,7vw,34px);margin:0;line-height:1.3}
+
+/* prizes */
+.prizes{display:grid;gap:16px}
+.prize{position:relative;border:1px solid var(--line);border-radius:20px;padding:26px 22px 22px;background:linear-gradient(160deg,rgba(242,193,78,.08),rgba(18,26,56,.6) 60%)}
+.prize.top{border-color:rgba(242,193,78,.7);background:radial-gradient(120% 90% at 100% 0%,rgba(242,193,78,.22),transparent 55%),linear-gradient(160deg,#1a2148,var(--night-2));box-shadow:0 20px 50px -24px rgba(242,193,78,.45)}
+.prize .rank{font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,40px);line-height:1.2;margin:0}
+.prize.top .rank{color:var(--lamp)}
+.prize .count{font-size:14px;color:var(--mist);margin:4px 0 16px}
+.prize .gift{display:flex;gap:14px;align-items:center;padding:14px;border-radius:14px;background:rgba(10,15,36,.55);border:1px dashed rgba(154,162,196,.35)}
+.prize .gift .ph{flex:none;width:72px;height:72px;border-radius:12px;background:repeating-linear-gradient(45deg,rgba(154,162,196,.12) 0 8px,transparent 8px 16px);display:grid;place-items:center;color:var(--mist);font-size:11px;text-align:center;line-height:1.3}
+.prize .gift .ph img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.prize .gift b{display:block;font-size:17px}
+.prize .gift span{font-size:13px;color:var(--mist)}
+.medal{position:absolute;top:18px;right:18px;width:44px;height:44px}
+
+/* outline table */
+.outline{display:grid;grid-template-columns:auto 1fr;border-top:1px solid rgba(154,162,196,.18)}
+.outline dt,.outline dd{margin:0;padding:16px 0;border-bottom:1px solid rgba(154,162,196,.18)}
+.outline dt{color:var(--lamp);font-weight:700;padding-right:22px;white-space:nowrap;font-size:15px}
+.outline dd{font-size:15px}
+.outline dd strong{font-family:var(--display);font-size:20px;font-weight:800}
+.tbd{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid rgba(232,138,58,.6);color:var(--ember);margin-left:6px;vertical-align:2px}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:start;padding:18px;border-radius:16px;background:var(--night-2)}
+.steps .n{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-family:var(--latin);font-style:italic;font-size:26px;color:var(--night);background:var(--lamp)}
+.steps h3{margin:2px 0 4px;font-size:17px}
+.steps p{margin:0;font-size:14px;color:var(--mist)}
+
+/* rules */
+.rules{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.rules li{display:flex;gap:12px;font-size:15px}
+.rules li::before{content:"";flex:none;width:18px;height:18px;margin-top:5px;border-radius:5px;border:2px solid var(--lamp);background:linear-gradient(var(--lamp),var(--lamp)) center/8px 8px no-repeat}
+
+/* instagram band */
+.insta{border-radius:20px;padding:24px 22px;background:linear-gradient(135deg,rgba(232,138,58,.16),rgba(242,193,78,.06));border:1px solid rgba(232,138,58,.35)}
+.insta p{margin:0 0 10px}
+.tag{font-family:var(--display);font-weight:800;font-size:22px;color:var(--lamp)}
+
+/* results */
+.teaser{text-align:center;padding:34px 20px;border-radius:20px;border:1px dashed var(--line)}
+.teaser .big{font-family:var(--display);font-weight:800;font-size:clamp(22px,6vw,30px);margin:0 0 6px}
+.winners{display:grid;gap:20px}
+.win{border-radius:20px;overflow:hidden;background:var(--night-2);border:1px solid var(--line)}
+.win.top{border-color:var(--lamp)}
+.win .photo{aspect-ratio:4/3;background:#060914}
+.win .photo img,.win .photo canvas{width:100%;height:100%;object-fit:cover;display:block}
+.win .cap{padding:16px 18px}
+.win .award{font-family:var(--display);font-weight:800;color:var(--lamp);font-size:20px}
+.win .ttl{font-size:17px;font-weight:700;margin:2px 0}
+.win .pen{font-size:14px;color:var(--mist)}
+.win .comment{font-size:14px;margin:10px 0 0}
+
+footer{padding:40px 0 56px;text-align:center;color:var(--mist);font-size:13px;border-top:1px solid rgba(154,162,196,.14)}
+footer .name{font-family:var(--display);font-weight:800;color:var(--frost);font-size:18px}
+
+@media (min-width:600px){
+  .hero h1 .sp{display:none}
+}
+@media (min-width:680px){
+  .prizes{grid-template-columns:1.25fr 1fr;align-items:stretch}
+  .winners{grid-template-columns:1fr 1fr}
+  .win.top{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <img class="logo" src="logo.png" alt="かまいし灯り KAMAISHI Akari Project" width="555" height="640">
+    <p class="event">かまいし冬灯り<span>2026</span></p>
+    <p class="contest">フォトコンテスト</p>
+    <h1>冬の<span class="glow">灯り</span>を、<br class="sp">あなたの一枚で。</h1>
+    <p class="org">主催：かまいし灯り実行委員会</p>
+    <div class="status" id="status"><span class="dot"></span><span id="statusText"></span></div>
+    <div class="cta-row" id="ctaRow"></div>
+    <p class="note" id="ctaNote"></p>
+  </div>
+</header>
+
+<main>
+  <section id="prizes">
+    <div class="wrap">
+      <div class="sec-head"><span class="no">01</span><h2>賞と賞品</h2></div>
+      <div class="prizes" id="prizeList"></div>
+    </div>
+  </section>
+
+  <section id="outline">
+    <div class="wrap">
+      <div class="sec-head"><span class="no">02</span><h2>募集内容</h2></div>
+      <dl class="outline" id="outlineList"></dl>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><span class="no">03</span><h2>応募のしかた</h2></div>
+      <ol class="steps">
+        <li><span class="n">1</span><div><h3>灯りを撮る</h3><p>かまいし冬灯りの会場や、釜石の冬の灯りを自由に撮影してください。スマホでも大丈夫です。</p></div></li>
+        <li><span class="n">2</span><div><h3>フォームから送る</h3><p>「応募する」ボタンから写真をアップロード。Googleアカウントでのログインが必要です。何枚でも応募できます。</p></div></li>
+        <li><span class="n">3</span><div><h3>結果発表を待つ</h3><p>結果はこのページと公式LINEで発表します。受賞者には公式LINEからご連絡します。</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="sec-head"><span class="no">04</span><h2>応募のきまり</h2></div>
+      <ul class="rules">
+        <li>応募者ご本人が撮影した写真に限ります。</li>
+        <li>人が写っている場合は、写っている方の了解を得てから応募してください。</li>
+        <li>受賞作品は、ペンネームとともに公式LINE・Instagram・展示などで紹介させていただきます。</li>
+        <li>受賞のご連絡は公式LINEから行います。フォームにはLINEの表示名を入力してください。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="instagram">
+    <div class="wrap">
+      <div class="insta">
+        <p>Instagramへの投稿は、もちろん自由です。</p>
+        <p class="tag" id="hashtag"></p>
+        <p style="margin:0;font-size:14px;color:var(--mist)">ただし、コンテストへの応募は<strong style="color:var(--frost)">このページのフォームから</strong>お願いします。Instagramの投稿だけでは応募になりません。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="wrap">
+      <div class="sec-head"><span class="no">05</span><h2>結果発表</h2></div>
+      <div id="resultArea"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="name">かまいし灯り実行委員会</p>
+    <p id="footInsta"></p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   ここを書き換えるだけでページの中身が変わります（編集用の設定）
+   phase：'open'＝募集中／'judging'＝審査中／'result'＝結果発表
+   ===================================================================== */
+const CONTEST = {
+  phase: 'open',
+  theme: 'かまいしの冬の灯り',
+  period: '2026年12月12日（土）〜 2027年1月11日（月）',
+  resultDate: '2027年1月末ごろ（予定）',
+  entries: '1人何枚でもOK',
+  eligibility: 'どなたでも応募できます',
+  formUrl: '',            // 応募フォームのURL（未設定のあいだは「準備中」表示）
+  instagramUrl: 'https://www.instagram.com/kamaishi.akari.project/',
+  hashtag: '#かまいし冬灯り',
+  prizes: [
+    { rank: '最優秀賞', count: '1名', gift: '賞品（準備中）', detail: '内容が決まりしだい掲載します', image: '' },
+    { rank: '審査員賞', count: '1名', gift: '賞品（準備中）', detail: '内容が決まりしだい掲載します', image: '' }
+  ],
+  winners: [
+    // 結果発表のときに入れる。image は写真のデータ（後でClaudeが差し込みます）
+    // { award: '最優秀賞', penName: 'ペンネーム', title: '作品タイトル', comment: '審査コメント', image: '' }
+  ]
+};
+/* ===================================================================== */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const isTBD = s => /◯|準備中/.test(s);
+const tbd = s => esc(s) + (isTBD(s) ? '<span class="tbd">仮</span>' : '');
+
+// #preview-result でプレビュー確認用に結果発表の見た目を表示
+const previewResult = location.hash === '#preview-result';
+const phase = previewResult ? 'result' : CONTEST.phase;
+
+function renderHero(){
+  const st = $('status');
+  st.className = 'status ' + phase;
+  $('statusText').textContent = {open:'作品募集中', judging:'ただいま審査中です', result:'結果発表中'}[phase];
+  const row = $('ctaRow'), note = $('ctaNote');
+  if (phase === 'open') {
+    if (CONTEST.formUrl) {
+      row.innerHTML = `<a class="btn btn-primary" href="${esc(CONTEST.formUrl)}" target="_blank" rel="noopener">応募する　→</a><a class="btn btn-ghost" href="#outline">募集内容を見る</a>`;
+      note.textContent = '応募フォーム（Googleフォーム）が開きます。';
+    } else {
+      row.innerHTML = `<span class="btn btn-primary" aria-disabled="true">応募フォーム準備中</span><a class="btn btn-ghost" href="#outline">募集内容を見る</a>`;
+      note.textContent = '受付開始まで、もう少しお待ちください。';
+    }
+  } else if (phase === 'judging') {
+    row.innerHTML = `<a class="btn btn-ghost" href="#results">結果発表について</a>`;
+    note.textContent = 'たくさんのご応募ありがとうございました。';
+  } else {
+    row.innerHTML = `<a class="btn btn-primary" href="#results">受賞作品を見る　↓</a>`;
+    note.textContent = '';
+  }
+}
+
+const medal = (gold) => `<svg class="medal" viewBox="0 0 44 44" aria-hidden="true"><defs><radialGradient id="g${gold?1:2}" cx="35%" cy="30%"><stop offset="0" stop-color="${gold?'#fff1b8':'#e8ecff'}"/><stop offset=".6" stop-color="${gold?'#f2c14e':'#9aa2c4'}"/><stop offset="1" stop-color="${gold?'#b07a14':'#5d6588'}"/></radialGradient></defs><circle cx="22" cy="22" r="18" fill="url(#g${gold?1:2})"/><path d="M22 11 l2.6 7.6 8 .1-6.4 4.8 2.4 7.7L22 26.6l-6.6 4.6 2.4-7.7-6.4-4.8 8-.1z" fill="rgba(10,15,36,.55)"/></svg>`;
+
+function renderPrizes(){
+  $('prizeList').innerHTML = CONTEST.prizes.map((p,i) => `
+    <article class="prize ${i===0?'top':''}">
+      ${medal(i===0)}
+      <h3 class="rank">${esc(p.rank)}</h3>
+      <p class="count">${esc(p.count)}</p>
+      <div class="gift">
+        <div class="ph">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.gift)}">` : '賞品の<br>写真'}</div>
+        <div><b>${tbd(p.gift)}</b><span>${esc(p.detail)}</span></div>
+      </div>
+    </article>`).join('');
+}
+
+function renderOutline(){
+  const rows = [
+    ['テーマ', `<strong>${esc(CONTEST.theme)}</strong>`],
+    ['募集期間', tbd(CONTEST.period)],
+    ['結果発表', tbd(CONTEST.resultDate)],
+    ['応募数', esc(CONTEST.entries)],
+    ['応募資格', esc(CONTEST.eligibility)],
+    ['応募方法', 'このページの「応募する」ボタンから（Googleフォーム）']
+  ];
+  $('outlineList').innerHTML = rows.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('hashtag').textContent = CONTEST.hashtag;
+  $('footInsta').innerHTML = `<a href="${esc(CONTEST.instagramUrl)}" target="_blank" rel="noopener">Instagram @kamaishi.akari.project</a>`;
+}
+
+// 結果発表プレビュー用の仮写真（夜景風の図）
+function samplePhoto(seed){
+  const c = document.createElement('canvas'); c.width = 800; c.height = 600;
+  const x = c.getContext('2d'); let s = seed;
+  const r = () => (s = (s*9301+49297)%233280)/233280;
+  const g = x.createLinearGradient(0,0,0,600); g.addColorStop(0,'#0b1233'); g.addColorStop(1,'#1e1430'); x.fillStyle=g; x.fillRect(0,0,800,600);
+  for(let i=0;i<70;i++){const cx=r()*800, cy=200+r()*400, rad=6+r()*40, a=.2+r()*.5; const gr=x.createRadialGradient(cx,cy,0,cx,cy,rad); gr.addColorStop(0,`rgba(255,${180+r()*60|0},90,${a})`); gr.addColorStop(1,'rgba(255,200,90,0)'); x.fillStyle=gr; x.beginPath(); x.arc(cx,cy,rad,0,7); x.fill();}
+  x.fillStyle='rgba(243,238,228,.55)'; x.font='600 26px "Zen Kaku Gothic New",sans-serif'; x.textAlign='center'; x.fillText('（受賞作品の写真が入ります）',400,560);
+  return c;
+}
+
+function renderResults(){
+  const area = $('resultArea');
+  if (phase !== 'result') {
+    area.innerHTML = `<div class="teaser"><p class="big">${tbd(CONTEST.resultDate)}<br>このページで発表します</p><p class="note" style="margin:0">受賞者の方には、公式LINEから個別にご連絡します。</p></div>`;
+    return;
+  }
+  const list = CONTEST.winners.length ? CONTEST.winners : CONTEST.prizes.map(p => ({award:p.rank, penName:'ペンネーム', title:'作品タイトル', comment:'審査員からのひとことが入ります。', image:''}));
+  area.innerHTML = `<div class="winners">${list.map((w,i)=>`
+    <article class="win ${i===0?'top':''}">
+      <div class="photo" data-i="${i}">${w.image?`<img src="${esc(w.image)}" alt="${esc(w.title)}">`:''}</div>
+      <div class="cap"><div class="award">${esc(w.award)}</div><div class="ttl">${esc(w.title)}</div><div class="pen">${esc(w.penName)}</div>${w.comment?`<p class="comment">${esc(w.comment)}</p>`:''}</div>
+    </article>`).join('')}</div>`;
+  area.querySelectorAll('.photo').forEach(el => { if(!el.firstElementChild) el.appendChild(samplePhoto(7+Number(el.dataset.i)*13)); });
+}
+
+// ヒーローの夜空：ゆっくり漂う光の粒
+function sky(){
+  const cv = $('sky'), x = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,dpr,parts=[];
+  function resize(){
+    dpr = Math.min(devicePixelRatio||1,2); W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W*dpr; cv.height = H*dpr; x.setTransform(dpr,0,0,dpr,0,0);
+    let s = 3; const r = () => (s=(s*9301+49297)%233280)/233280;
+    parts = Array.from({length: Math.round(W*H/9000)}, () => ({
+      x:r()*W, y:r()*H, rad: 2+r()*r()*26, a:.15+r()*.55, hue: 30+r()*20,
+      vy: -(0.05+r()*0.18), ph: r()*6.28, star: r()<.18
+    }));
+  }
+  function draw(t){
+    x.clearRect(0,0,W,H);
+    for(const p of parts){
+      const tw = .65 + .35*Math.sin(t/900 + p.ph);
+      if(p.star){
+        const z = 2+p.rad*.35; x.fillStyle = `rgba(255,240,195,${p.a*tw})`;
+        x.beginPath(); x.moveTo(p.x,p.y-z*2); x.lineTo(p.x+z*.3,p.y-z*.3); x.lineTo(p.x+z*2,p.y); x.lineTo(p.x+z*.3,p.y+z*.3); x.lineTo(p.x,p.y+z*2); x.lineTo(p.x-z*.3,p.y+z*.3); x.lineTo(p.x-z*2,p.y); x.lineTo(p.x-z*.3,p.y-z*.3); x.fill();
+      } else {
+        const g = x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.rad);
+        g.addColorStop(0,`hsla(${p.hue},95%,68%,${p.a*tw})`); g.addColorStop(1,`hsla(${p.hue},95%,60%,0)`);
+        x.fillStyle = g; x.beginPath(); x.arc(p.x,p.y,p.rad,0,7); x.fill();
+      }
+      if(!reduce){ p.y += p.vy; if(p.y < -30){ p.y = H+30; } }
+    }
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  resize(); addEventListener('resize', resize); requestAnimationFrame(draw);
+}
+
+renderHero(); renderPrizes(); renderOutline(); renderResults(); sky();
+</script>
+</body>
+</html>
