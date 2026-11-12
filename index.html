@@ -80,7 +80,7 @@ section{padding:56px 0;border-top:1px solid rgba(154,162,196,.14)}
 .prize.top .rank{color:var(--lamp)}
 .prize .count{font-size:14px;color:var(--mist);margin:4px 0 16px}
 .prize .gift{display:flex;gap:14px;align-items:center;padding:14px;border-radius:14px;background:rgba(10,15,36,.55);border:1px dashed rgba(154,162,196,.35)}
-.prize .gift .ph{flex:none;width:72px;height:72px;border-radius:12px;background:repeating-linear-gradient(45deg,rgba(154,162,196,.12) 0 8px,transparent 8px 16px);display:grid;place-items:center;color:var(--mist);font-size:11px;text-align:center;line-height:1.3}
+.prize .gift .ph{flex:none;width:72px;height:72px;border-radius:12px;overflow:hidden;display:grid;place-items:center;color:var(--mist);font-size:11px;text-align:center;line-height:1.3}
 .prize .gift .ph img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 .prize .gift b{display:block;font-size:17px}
 .prize .gift span{font-size:13px;color:var(--mist)}
@@ -179,8 +179,8 @@ footer .name{font-family:var(--display);font-weight:800;color:var(--frost);font-
     <div class="wrap">
       <div class="sec-head"><span class="no">03</span><h2>応募のしかた</h2></div>
       <ol class="steps">
-        <li><span class="n">1</span><div><h3>灯りを撮る</h3><p>かまいし冬灯りの会場や、釜石の冬の灯りを自由に撮影してください。スマホでも大丈夫です。</p></div></li>
-        <li><span class="n">2</span><div><h3>フォームから送る</h3><p>「応募する」ボタンから写真をアップロード。Googleアカウントでのログインが必要です。何枚でも応募できます。</p></div></li>
+        <li><span class="n">1</span><div><h3>イルミネーションを撮る</h3><p>かまいし冬灯り2026の会場で撮影してください。<strong style="color:var(--frost)">写真には必ずイルミネーションが写るように</strong>お願いします。人物や動物は、写っていても写っていなくても応募できます。スマホでも大丈夫です。</p></div></li>
+        <li><span class="n">2</span><div><h3>フォームから送る</h3><p>「応募する」ボタンから写真をアップロード。Googleアカウントでのログインが必要です。1回の送信で1枚、何回でも応募できます。</p></div></li>
         <li><span class="n">3</span><div><h3>結果発表を待つ</h3><p>結果はこのページと公式LINEで発表します。受賞者には公式LINEからご連絡します。</p></div></li>
       </ol>
     </div>
@@ -190,6 +190,7 @@ footer .name{font-family:var(--display);font-weight:800;color:var(--frost);font-
     <div class="wrap">
       <div class="sec-head"><span class="no">04</span><h2>応募のきまり</h2></div>
       <ul class="rules">
+        <li>かまいし冬灯り2026の会場で撮影した、イルミネーションが写っている写真に限ります。</li>
         <li>応募者ご本人が撮影した写真に限ります。</li>
         <li>人が写っている場合は、写っている方の了解を得てから応募してください。</li>
         <li>受賞作品は、ペンネームとともに公式LINE・Instagram・展示などで紹介させていただきます。</li>
@@ -230,17 +231,17 @@ footer .name{font-family:var(--display);font-weight:800;color:var(--frost);font-
    ===================================================================== */
 const CONTEST = {
   phase: 'open',
-  theme: 'かまいしの冬の灯り',
+  theme: 'かまいし冬灯り2026のイルミネーション',
   period: '2026年12月12日（土）15:00 〜 2027年1月11日（月）23:59',
   resultDate: '2027年1月末ごろ（予定）',
-  entries: '1人何枚でもOK',
+  entries: '1人何枚でもOK（1回の送信で1枚）',
   eligibility: 'どなたでも応募できます',
-  formUrl: '',            // 応募フォームのURL（未設定のあいだは「準備中」表示）
+  formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdhZtYdm6gazPEW15cOKJmN1gnRpa-mp016gkHeGdsy5Nv4Fw/viewform',
   instagramUrl: 'https://www.instagram.com/kamaishi.akari.project/',
   hashtag: '#かまいし冬灯り',
   prizes: [
-    { rank: '最優秀賞', count: '1名', gift: '賞品（準備中）', detail: '内容が決まりしだい掲載します', image: '' },
-    { rank: '審査員賞', count: '1名', gift: '賞品（準備中）', detail: '内容が決まりしだい掲載します', image: '' }
+    { rank: '最優秀賞', count: '1名', gift: '賞品（準備中）', detail: 'お楽しみに！内容が決まりしだい掲載します', image: '' },
+    { rank: '審査員賞', count: '1名', gift: '賞品（準備中）', detail: 'お楽しみに！内容が決まりしだい掲載します', image: '' }
   ],
   winners: [
     // 結果発表のときに入れる。image は写真のデータ（後でClaudeが差し込みます）
@@ -249,6 +250,7 @@ const CONTEST = {
 };
 /* ===================================================================== */
 
+const GIFT_SVG = `<svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true"><defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22273f"/><stop offset="1" stop-color="#07090f"/></linearGradient></defs><rect width="72" height="72" rx="12" fill="#05070d"/><rect x="13" y="30" width="46" height="32" rx="3" fill="url(#gb)" stroke="#3a3f5c"/><rect x="10" y="22" width="52" height="11" rx="2.5" fill="#1b2034" stroke="#3a3f5c"/><rect x="32" y="22" width="8" height="40" fill="#f2c14e"/><path d="M36 22c-6-9-16-9-15-3 1 5 10 4 15 3zm0 0c6-9 16-9 15-3-1 5-10 4-15 3z" fill="none" stroke="#f2c14e" stroke-width="3" stroke-linejoin="round"/><circle cx="36" cy="47" r="10" fill="#05070d" stroke="#f2c14e" stroke-width="1.5"/><text x="36" y="52.5" text-anchor="middle" font-family="Shippori Mincho B1,serif" font-weight="800" font-size="15" fill="#f2c14e">?</text></svg>`;
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const isTBD = s => /◯|準備中/.test(s);
@@ -301,8 +303,8 @@ function renderPrizes(){
       <h3 class="rank">${esc(p.rank)}</h3>
       <p class="count">${esc(p.count)}</p>
       <div class="gift">
-        <div class="ph">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.gift)}">` : '賞品の<br>写真'}</div>
-        <div><b>${tbd(p.gift)}</b><span>${esc(p.detail)}</span></div>
+        <div class="ph">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.gift)}">` : GIFT_SVG}</div>
+        <div><b>${esc(p.gift)}</b><span>${esc(p.detail)}</span></div>
       </div>
     </article>`).join('');
 }
@@ -313,6 +315,7 @@ function renderOutline(){
     ['募集期間', tbd(CONTEST.period)],
     ['結果発表', tbd(CONTEST.resultDate)],
     ['応募数', esc(CONTEST.entries)],
+    ['審査方法', '賞の決め方は、追ってお知らせします'],
     ['応募資格', esc(CONTEST.eligibility)],
     ['応募方法', 'このページの「応募する」ボタンから（Googleフォーム）']
   ];
