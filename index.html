@@ -44,8 +44,17 @@ img{max-width:100%;display:block}
 .hero h1 .glow{color:var(--lamp);text-shadow:0 0 28px rgba(242,193,78,.55),0 0 2px rgba(255,230,160,.9)}
 .hero .sub{font-family:var(--display);font-weight:600;font-size:clamp(18px,4.6vw,24px);margin:18px 0 0;color:var(--frost)}
 .hero .org{color:var(--mist);font-size:14px;margin:6px 0 0}
+.period{display:inline-grid;margin:26px auto 0;padding:18px 26px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.period .plabel{font-size:12px;letter-spacing:.35em;color:var(--lamp);margin-bottom:4px}
+.period .pline{display:flex;align-items:baseline;gap:10px;line-height:1.05}
+.period .p1{justify-self:start;padding-right:56px}
+.period .p2{justify-self:end;padding-left:56px;margin-top:2px}
+.period b{font-family:var(--latin);font-style:italic;font-weight:500;font-size:clamp(46px,13vw,64px);letter-spacing:.02em;color:var(--frost);text-shadow:0 0 22px rgba(242,193,78,.35)}
+.period i{font-style:normal;font-size:13px;letter-spacing:.18em;color:var(--lamp);font-weight:700}
+.period em{font-style:normal;font-size:13px;color:var(--mist)}
 .status{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:8px 16px 8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,15,36,.6);backdrop-filter:blur(4px);font-size:14px}
 .status .dot{width:9px;height:9px;border-radius:50%;background:var(--lamp);box-shadow:0 0 12px var(--lamp)}
+.status.soon .dot{background:var(--mist);box-shadow:none}
 .status.judging .dot{background:var(--mist);box-shadow:none}
 .status.result .dot{background:var(--ember);box-shadow:0 0 12px var(--ember)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;justify-content:center}
@@ -140,6 +149,11 @@ footer .name{font-family:var(--display);font-weight:800;color:var(--frost);font-
     <p class="contest">フォトコンテスト</p>
     <h1>冬の<span class="glow">灯り</span>を、<br class="sp">あなたの一枚で。</h1>
     <p class="org">主催：かまいし灯り実行委員会</p>
+    <div class="period" aria-label="応募期間 2026年12月12日（土）から2027年1月11日（月）まで">
+      <span class="plabel">応募期間</span>
+      <span class="pline p1"><b>12.12</b><i>SAT</i><em>から</em></span>
+      <span class="pline p2"><b>1.11</b><i>MON</i><em>まで</em></span>
+    </div>
     <div class="status" id="status"><span class="dot"></span><span id="statusText"></span></div>
     <div class="cta-row" id="ctaRow"></div>
     <p class="note" id="ctaNote"></p>
@@ -217,7 +231,7 @@ footer .name{font-family:var(--display);font-weight:800;color:var(--frost);font-
 const CONTEST = {
   phase: 'open',
   theme: 'かまいしの冬の灯り',
-  period: '2026年12月12日（土）〜 2027年1月11日（月）',
+  period: '2026年12月12日（土）15:00 〜 2027年1月11日（月）23:59',
   resultDate: '2027年1月末ごろ（予定）',
   entries: '1人何枚でもOK',
   eligibility: 'どなたでも応募できます',
@@ -242,14 +256,26 @@ const tbd = s => esc(s) + (isTBD(s) ? '<span class="tbd">仮</span>' : '');
 
 // #preview-result でプレビュー確認用に結果発表の見た目を表示
 const previewResult = location.hash === '#preview-result';
-const phase = previewResult ? 'result' : CONTEST.phase;
+const OPEN_AT = new Date('2026-12-12T15:00:00+09:00');
+const CLOSE_AT = new Date('2027-01-12T00:00:00+09:00');
+function autoPhase(){
+  if (CONTEST.phase === 'result') return 'result';
+  const now = new Date();
+  if (now < OPEN_AT) return 'soon';
+  if (now < CLOSE_AT) return 'open';
+  return 'judging';
+}
+const phase = previewResult ? 'result' : (location.hash === '#preview-open' ? 'open' : autoPhase());
 
 function renderHero(){
   const st = $('status');
   st.className = 'status ' + phase;
-  $('statusText').textContent = {open:'作品募集中', judging:'ただいま審査中です', result:'結果発表中'}[phase];
+  $('statusText').textContent = {soon:'まもなく受付開始', open:'作品募集中', judging:'受付は終了しました・審査中', result:'結果発表中'}[phase];
   const row = $('ctaRow'), note = $('ctaNote');
-  if (phase === 'open') {
+  if (phase === 'soon') {
+    row.innerHTML = `<span class="btn btn-primary" aria-disabled="true">12/12（土）15:00 受付開始</span><a class="btn btn-ghost" href="#outline">募集内容を見る</a>`;
+    note.textContent = '受付開始の時刻になると、ここから応募できるようになります。';
+  } else if (phase === 'open') {
     if (CONTEST.formUrl) {
       row.innerHTML = `<a class="btn btn-primary" href="${esc(CONTEST.formUrl)}" target="_blank" rel="noopener">応募する　→</a><a class="btn btn-ghost" href="#outline">募集内容を見る</a>`;
       note.textContent = '応募フォーム（Googleフォーム）が開きます。';
